@@ -17,19 +17,19 @@ const run = async () => {
   // A short name for the record that will show in urls
   // Lowercase with no spaces.
   // Ex: whats-hot
-  const recordName = ''
+  const recordName = 'skoleprat'
 
   // A display name for your feed
   // Ex: What's Hot
-  const displayName = ''
+  const displayName = 'Skoleprat'
 
   // (Optional) A description of your feed
   // Ex: Top trending content from the whole network
-  const description = ''
+  const description = 'Alt skolerelatert prat. Foreløpig er det kun #skole som gjelder, men vil forsøke å legge til ulike nøkkelord og algoritmer senere.'
 
   // (Optional) The path to an image to be used as your feed's avatar
   // Ex: ~/path/to/avatar.jpeg
-  const avatar: string = ''
+  const avatar: string = '/var/www/html/skoleprat.png'
 
   // -------------------------------------
   // NO NEED TO TOUCH ANYTHING BELOW HERE
