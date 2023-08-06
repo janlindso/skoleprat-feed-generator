@@ -8,7 +8,30 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
   async handleEvent(evt: RepoEvent) {
     if (!isCommit(evt)) return
     const ops = await getOpsByType(evt)
-    const words = ['#skole', 'læring'];
+    const words = [
+      '#skole', 
+      'læring', 
+      'pedagogikk', 
+      'pedagogisk', 
+      'utdanning', 
+      'skole', 
+      'videregående', 
+      'grunnskolen', 
+      'tonje brenna', 
+      'utdanningsforbundet',
+      'utdanningsdirektoratet', 
+      'læremidler', 
+      'digitale læremidler', 
+      'digital kompetanse', 
+      'skolefrafall', 
+      'fraværsgrensa', 
+      'fraværsgrensen', 
+      'skolebøker', 
+      'læremiddel', 
+      'lærer', 
+      'elevene', 
+      'elever'
+    ];
 
     const postsToDelete = ops.posts.deletes.map((del) => del.uri)
     const postsToCreate = ops.posts.creates
