@@ -8,12 +8,13 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
   async handleEvent(evt: RepoEvent) {
     if (!isCommit(evt)) return
     const ops = await getOpsByType(evt)
+    const words = ['#skole', 'læring'];
 
     const postsToDelete = ops.posts.deletes.map((del) => del.uri)
     const postsToCreate = ops.posts.creates
       .filter((create) => {
         // only skole-related posts
-        return create.record.text.toLowerCase().includes('#skole')
+        return words.some(el => create.record.text.toLowerCase().includes(el));
       })
       .map((create) => {
         // map skole-related posts to a db row
