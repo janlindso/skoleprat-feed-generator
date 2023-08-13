@@ -8,9 +8,11 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
   async handleEvent(evt: RepoEvent) {
     if (!isCommit(evt)) return
     const ops = await getOpsByType(evt)
+
     const hashtag = '#skole';
     const authors = [];
     const words = [
+
       'læring', 
       'pedagogikk', 
       'pedagogisk', 
