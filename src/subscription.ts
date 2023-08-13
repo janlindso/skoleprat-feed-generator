@@ -8,13 +8,58 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
   async handleEvent(evt: RepoEvent) {
     if (!isCommit(evt)) return
     const ops = await getOpsByType(evt)
-    const words = ['#skole', 'læring'];
+    const hashtag = '#skole';
+    const authors = [];
+    const words = [
+      'læring', 
+      'pedagogikk', 
+      'pedagogisk', 
+      'utdanning', 
+      'skole', 
+      'videregående', 
+      'grunnskolen', 
+      'tonje brenna', 
+      'utdanningsforbundet',
+      'utdanningsdirektoratet', 
+      'læremidler', 
+      'digitale læremidler', 
+      'digital kompetanse', 
+      'skolefrafall', 
+      'fraværsgrensa', 
+      'fraværsgrensen', 
+      'skolebøker', 
+      'læremiddel', 
+      'lærer', 
+      'elevene', 
+      'elever'
+    ];
+
+    const multiSearchAtLeastN = (text, searchWords, minimumMatches) => {
+      let matches = 0;
+      for (let word of searchWords) {
+        if (text.includes(word) && ++matches >= minimumMatches) return true;
+      }
+      return false;
+    };
 
     const postsToDelete = ops.posts.deletes.map((del) => del.uri)
     const postsToCreate = ops.posts.creates
       .filter((create) => {
         // only skole-related posts
-        return words.some(el => create.record.text.toLowerCase().includes(el));
+        if (create.record.text.toLowerCase().includes(hashtag)) {
+          return true;
+        }
+        else if (authors.some(el => create.author.toLowerCase().includes(el)) && multiSearchAtLeastN(create.record.text.toLowerCase(), words, 1)) {
+          return true;
+        }
+        else if (multiSearchAtLeastN(create.record.text.toLowerCase(), words, 2)) {
+          return true;
+        }
+        else {
+          return false;
+        }
+
+        
       })
       .map((create) => {
         // map skole-related posts to a db row
