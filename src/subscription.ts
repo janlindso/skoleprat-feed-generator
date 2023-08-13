@@ -61,13 +61,12 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
       .filter((create) => {
         // only skole-related posts
         if (create.record.text.toLowerCase().includes(hashtag)) {
-          console.log(create.author);
           return true;
         }
-        else if (authors.some(el => create.author.toLowerCase().includes(el)) && multiSearchAtLeastN(create.record.text.toLowerCase(), words, 1)) {
+        else if (authors.some(el => create.author.toLowerCase().includes(el)) && multiSearchAtLeastN(create.record.text.toLowerCase(), allWords, 1)) {
           return true;
         }
-        else if (multiSearchAtLeastN(create.record.text.toLowerCase(), words, 2)) {
+        else if (multiSearchAtLeastN(create.record.text.toLowerCase(), priorityWords, 1) && multiSearchAtLeastN(create.record.text.toLowerCase(), allWords, 1)) {
           return true;
         }
         else {
