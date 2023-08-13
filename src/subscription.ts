@@ -11,30 +11,42 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
 
     const hashtag = '#skole';
     const authors = [];
-    const words = [
-
-      'læring', 
+    const priorityWords = [
+      'utdanningsforbundet',
+      'utdanningsdirektoratet', 
       'pedagogikk', 
       'pedagogisk', 
+      'digitale læremidler', 
+      'digital kompetanse', 
+      'læremidler', 
+      'læremiddel', 
+      'fagfornyelsen',
+      'kunnskapsløftet',
+      'lk06',
+      'kompetansemål',
+      'vurderingsgrunnlag'
+    ];
+    const words = [
+      'læring', 
       'utdanning', 
       'skole', 
       'videregående', 
+      'lærebøker',
       'grunnskolen', 
       'tonje brenna', 
-      'utdanningsforbundet',
-      'utdanningsdirektoratet', 
-      'læremidler', 
-      'digitale læremidler', 
-      'digital kompetanse', 
       'skolefrafall', 
       'fraværsgrensa', 
       'fraværsgrensen', 
       'skolebøker', 
-      'læremiddel', 
       'lærer', 
       'elevene', 
-      'elever'
+      'elever',
+      'lærling',
+      'lærefag',
+      'fagprøve',
+      'fagbrev',
     ];
+    const allWords = priorityWords.concat(words);
 
     const multiSearchAtLeastN = (text, searchWords, minimumMatches) => {
       let matches = 0;
@@ -49,6 +61,7 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
       .filter((create) => {
         // only skole-related posts
         if (create.record.text.toLowerCase().includes(hashtag)) {
+          console.log(create.author);
           return true;
         }
         else if (authors.some(el => create.author.toLowerCase().includes(el)) && multiSearchAtLeastN(create.record.text.toLowerCase(), words, 1)) {
