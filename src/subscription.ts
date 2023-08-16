@@ -17,41 +17,61 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
       'pedagogikk', 
       'pedagogisk', 
       'digitale læremidler', 
+      'digitale læremiddel',
       'digital kompetanse', 
       'læremidler', 
       'læremiddel', 
+      'fagfornyelse',
       'fagfornyelsen',
+      'fagfornying',
+      'fagfornyinga',
       'kunnskapsløftet',
       'lk06',
       'kompetansemål',
       'vurderingsgrunnlag'
     ];
     const words = [
-      'læring', 
+      'læring',
       'utdanning', 
       'skole', 
-      'videregående', 
+      'skoler',
+      'skule',
+      'skular',
+      'videregående',
+      'vidaregåande',
+      'lærebok', 
       'lærebøker',
       'grunnskolen', 
+      'grunnskulen',
       'tonje brenna', 
       'skolefrafall', 
+      'fråværsgrense',
       'fraværsgrensa', 
       'fraværsgrensen', 
       'skolebøker', 
       'lærer', 
+      'lærar',
       'elevene', 
       'elever',
+      'elevar',
+      'elevane',
       'lærling',
+      'lærlinger',
+      'lærlingar',
       'lærefag',
       'fagprøve',
       'fagbrev',
+      'mobilforbud',
+      '#spilliskolen'
     ];
     const allWords = priorityWords.concat(words);
+    const wordInString = (s, word) => new RegExp('\\b' + word + '\\b', 'i').test(s);
+
 
     const multiSearchAtLeastN = (text, searchWords, minimumMatches) => {
       let matches = 0;
       for (let word of searchWords) {
-        if (text.includes(word) && ++matches >= minimumMatches) return true;
+        if (wordInString(text, word) && ++matches >= minimumMatches) return true;
       }
       return false;
     };
@@ -66,7 +86,7 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
         else if (authors.some(el => create.author.toLowerCase().includes(el)) && multiSearchAtLeastN(create.record.text.toLowerCase(), allWords, 1)) {
           return true;
         }
-        else if (multiSearchAtLeastN(create.record.text.toLowerCase(), priorityWords, 1) && multiSearchAtLeastN(create.record.text.toLowerCase(), allWords, 1)) {
+        else if (multiSearchAtLeastN(create.record.text.toLowerCase(), priorityWords, 1) && multiSearchAtLeastN(create.record.text.toLowerCase(), words, 1)) {
           return true;
         }
         else {
