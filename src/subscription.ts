@@ -35,6 +35,8 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
       'utdanning', 
       'skole', 
       'skoler',
+      'skoledag',
+      'skoledagen',
       'skule',
       'skular',
       'videregående',
