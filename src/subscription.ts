@@ -65,6 +65,7 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
       'fraværsgrensen', 
       'grunnskolen', 
       'grunnskulen',
+      'kari nessa nordtun',
       'lærebok', 
       'lærebøker',
       'lærer', 
@@ -75,6 +76,7 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
       'lærlingar',
       'lærefag',
       'mobilforbud',
+      'nessa nordtun',
       'skole', 
       'skoler',
       'skolen',
@@ -88,7 +90,6 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
       'skolefrafall', 
       'skulefrafall',
       'studiespesialisering',
-      'tonje brenna', 
       'utdanning', 
       'vg1',
       'vg2',
@@ -114,7 +115,7 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
     const postsToCreate = ops.posts.creates
       .filter((create) => {
         // only skole-related posts
-        if (create.record.text.toLowerCase().includes(hashtag)) {
+        if (create.record.text.toLowerCase().includes(hashtag) && !create.record.text.toLowerCase().includes('#skolechat')) {
           return true;
         }
         else if (authors.some(el => create.author.toLowerCase().includes(el)) && multiSearchAtLeastN(create.record.text.toLowerCase(), allWords, 1)) {
