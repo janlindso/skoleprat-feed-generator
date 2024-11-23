@@ -9,7 +9,7 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
     if (!isCommit(evt)) return
     const ops = await getOpsByType(evt)
 
-    const hashtag = '#skole';
+    const hashtag = '#skoleprat';
     const authors = [];
     const priorityWords = [
       'digitale læremidler', 
