@@ -25,7 +25,7 @@ const run = async () => {
 
   // (Optional) A description of your feed
   // Ex: Top trending content from the whole network
-  const description = 'All skolerelatert prat. Det er fortsatt tidlig testfase, men kommer til å videreutvikle algoritmen fortløpende slik at den blir bedre.'
+  const description = 'Dette er feeden for skolerelatert prat. Lik den gjerne og trykk "Pin to home" for å legge den til på forsiden din.'
 
   // (Optional) The path to an image to be used as your feed's avatar
   // Ex: ~/path/to/avatar.jpeg
