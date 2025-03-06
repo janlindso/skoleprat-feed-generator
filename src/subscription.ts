@@ -67,6 +67,8 @@ export class FirehoseSubscription extends FirehoseSubscriptionBase {
       'grunnskolen', 
       'grunnskulen',
       'kari nessa nordtun',
+      'kunnskapsminister',
+      'kunnskapsministeren',
       'lærebok', 
       'lærebøker',
       'lærer', 
